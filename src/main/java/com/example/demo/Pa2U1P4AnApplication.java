@@ -15,6 +15,10 @@ public class Pa2U1P4AnApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("mi primer proyecto");
+		/*Spring framework: Es un Framework que permite la construccion / desarollo 
+		 * de aplicaciones empresariales basadas en Srping
+		 */
+		
 		
 	}
 
