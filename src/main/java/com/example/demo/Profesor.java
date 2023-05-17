@@ -2,6 +2,10 @@ package com.example.demo;
 
 import java.time.LocalDateTime;
 
+import org.springframework.stereotype.Component;
+
+//esta clase es de tu control componet paso 1
+@Component
 public class Profesor {
 	private String nombre;
 	private String apellido;
