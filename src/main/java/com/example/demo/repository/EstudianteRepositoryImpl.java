@@ -15,26 +15,42 @@ public class EstudianteRepositoryImpl implements EstudianteRepository{
 
 	@Override
 	public void insertar(Estudiante estudiante) {
-		// TODO Auto-generated method stub
+	
 		baseDatos.add(estudiante);
 		
 	}
 
 	@Override
 	public void actualizar(Estudiante estudiante) {
-		// TODO Auto-generated method stub
-		
+		Estudiante estu = this.seleccionar(estudiante.getCedula());
+		this.eliminar(estudiante.getCedula());
+		this.insertar(estudiante);
 	}
 
 	@Override
 	public Estudiante seleccionar(String cedula) {
-		// TODO Auto-generated method stub
-		return null;
+		Estudiante estuEncontrado = new Estudiante();
+		
+		for(Estudiante estu : baseDatos) {
+			if(cedula.equals(estu.getCedula())) {
+				estuEncontrado = estu;		
+			}
+		}
+		return estuEncontrado;
 	}
 
 	@Override
 	public void eliminar(String cedula) {
-		// TODO Auto-generated method stub
+		Estudiante estu = this.seleccionar(cedula);
+		baseDatos.remove(estu);	
+	}
+	
+
+	//asi se imprime la lista sin void sin buscar nada a noser lo pida
+	@Override
+	public List<Estudiante> seleccionarTodos() {
+		System.out.println("Los estudiantes");
+		return baseDatos;
 		
 	}
 	
