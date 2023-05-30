@@ -1,10 +1,11 @@
 package com.example.demo.banco.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.demo.banco.repository.CuentaRepository;
 import com.example.demo.banco.repository.modelo.Cuenta;
-
+@Service
 public class CuentaServiceImpl implements CuentaService {
 	
 	@Autowired

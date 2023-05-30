@@ -3,9 +3,11 @@ package com.example.demo.banco.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.example.demo.banco.repository.modelo.Cuenta;
 import com.example.demo.banco.repository.modelo.Transferencia;
-
+@Repository
 public class CuentaRepositoryImpl implements CuentaRepository {
 	
 	private static List<Cuenta> baseDatos = new ArrayList<>();
