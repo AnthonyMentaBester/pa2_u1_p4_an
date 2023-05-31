@@ -47,6 +47,13 @@ public class TransferenciaRepositoryImpl implements TransferenciaRepository{
 		}
 		return transEncontrado;
 	}
+
+	@Override
+	public List<Transferencia> imprimirTodos() {
+		// TODO Auto-generated method stub
+		System.out.println("Las Transferencias todas son");
+		return baseDatos;
+	}
 	
 
 }

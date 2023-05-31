@@ -3,8 +3,10 @@ package com.example.demo.banco.service;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.banco.repository.CuentaRepository;
@@ -20,6 +22,10 @@ public class TransferenciaServiceImpl implements TransferenciaService{
 	
 	@Autowired
 	private CuentaRepository cuentaRepository;
+	
+	@Autowired
+	@Qualifier("nacional")
+	private MontoDebitarService debitarService;
 	
 	@Override
 	public void guardar(Transferencia transferencia) {
@@ -56,12 +62,15 @@ public class TransferenciaServiceImpl implements TransferenciaService{
 		Cuenta ctaOrigen = this.cuentaRepository.seleccionarPorNumero(numeroCtaOrigen);
 		//2.- Consultar el saldo de la cuenta 
 		BigDecimal saldoOrigen = ctaOrigen.getSaldo();
+		BigDecimal montoDebitar = this.debitarService.calcular(monto);
 		//3.-validad si el saldo es insufuciente
 		if(monto.compareTo(saldoOrigen)<=0) {	
 			//5.-si es suficiente vaya al paso 6
 			//6.- realizamos la resta del saldo origen - monto
 			//con big decima no usar operadores +-*/
-			BigDecimal nuevoSaldoOrigen = saldoOrigen.subtract(monto);
+			
+			BigDecimal nuevoSaldoOrigen = saldoOrigen.subtract(montoDebitar);
+			
 			//7.- actualizamos el nuevo saldo de la cta origen
 			ctaOrigen.setSaldo(nuevoSaldoOrigen);
 			this.cuentaRepository.actualizar(ctaOrigen);			
@@ -91,6 +100,12 @@ public class TransferenciaServiceImpl implements TransferenciaService{
 			System.out.println("su saldo es insuficiente, su saldo es: " + saldoOrigen);
 		}
 		
+	}
+
+	@Override
+	public List<Transferencia> reporteTodos() {
+		// TODO Auto-generated method stub
+		return this.transferenciaRepository.imprimirTodos();
 	}
 
 
