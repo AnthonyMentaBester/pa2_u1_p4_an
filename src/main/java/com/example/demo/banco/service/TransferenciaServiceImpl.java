@@ -1,7 +1,6 @@
 package com.example.demo.banco.service;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.banco.repository.CuentaRepository;
 import com.example.demo.banco.repository.TransferenciaRepository;
 import com.example.demo.banco.repository.modelo.Cuenta;
+import com.example.demo.banco.repository.modelo.Impuesto;
 import com.example.demo.banco.repository.modelo.Transferencia;
 
 @Service
@@ -24,12 +24,17 @@ public class TransferenciaServiceImpl implements TransferenciaService{
 	private CuentaRepository cuentaRepository;
 	
 	@Autowired
+	private Impuesto impuesto;
+	
+	@Autowired
 	@Qualifier("nacional")
 	private MontoDebitarService debitarService;
 	
 	@Override
 	public void guardar(Transferencia transferencia) {
 		// TODO Auto-generated method stub
+		System.out.println("la transferencia se va a calcular con el IVA");
+		System.out.println(impuesto.getIva());
 		this.transferenciaRepository.insertar(transferencia);
 		
 	}
